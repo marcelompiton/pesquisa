@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descubra suas Prioridades &mdash; Rafaela Consalter</title>
+  <meta name="description" content="Descubra quais propostas da Rafaela Consalter mais combinam com suas prioridades na Defensoria P&uacute;blica do RS.">
+  <meta property="og:title" content="Descubra suas Prioridades &mdash; Rafaela Consalter">
+  <meta property="og:description" content="Fa&ccedil;a o quiz e descubra quais das 35 propostas da Rafaela est&atilde;o mais alinhadas com voc&ecirc;!">
+  <meta property="og:image" content="https://marcelompiton.github.io/site-campanha/foto-rafaela.jpeg">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231a3a2a'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='30' fill='%23d4ba6a'%3ERC%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-900: #1a3a2a;
+      --green-800: #1e4d35;
+      --green-700: #26613f;
+      --green-600: #2d7a4a;
+      --green-100: #e8f5ed;
+      --green-50: #f2faf5;
+      --gold-600: #8b7332;
+      --gold-500: #a3873c;
+      --gold-400: #c4a44e;
+      --gold-300: #d4ba6a;
+      --gold-200: #e6d49a;
+      --gold-100: #f5efd5;
+      --white: #ffffff;
+      --gray-50: #f8f9fa;
+      --gray-100: #f1f3f5;
+      --gray-200: #e2e5e9;
+      --gray-300: #ced4da;
+      --gray-500: #868e96;
+      --gray-600: #5a6270;
+      --gray-700: #3d4450;
+      --gray-800: #2b3038;
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 50%, var(--green-700) 100%);
+      color: var(--gray-800);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-x: hidden;
+    }
+
+    .quiz-container {
+      width: 100%;
+      max-width: 560px;
+      position: relative;
+    }
+
+    /* ===== SCREENS ===== */
+    .screen {
+      display: none;
+      animation: slideIn 0.5s ease;
+    }
+    .screen.active { display: block; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-30px); }
+    }
+
+    .screen.exiting {
+      animation: slideOut 0.3s ease forwards;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-300), var(--gold-400));
+    }
+
+    /* ===== WELCOME SCREEN ===== */
+    .welcome-badge {
+      display: inline-block;
+      background: var(--green-100);
+      color: var(--green-700);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .welcome-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--gold-300);
+      margin: 0 auto 20px;
+      display: block;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .welcome-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--green-900);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .welcome-subtitle {
+      font-size: 14px;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .welcome-name {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold-600);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .welcome-role {
+      font-size: 12px;
+      color: var(--gray-500);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .welcome-desc {
+      font-size: 15px;
+      color: var(--gray-700);
+      text-align: center;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .welcome-stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--green-700);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, var(--green-700), var(--green-600));
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(38,97,63,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(38,97,63,0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .btn-primary:active::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-secondary {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--white);
+      color: var(--green-700);
+      border: 2px solid var(--green-700);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--green-50);
+      transform: translateY(-1px);
+    }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 24px;
+      background: #25D366;
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1fb855;
+      transform: translateY(-2px);
+    }
+
+    .btn-whatsapp svg { flex-shrink: 0; }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress-wrapper {
+      margin-bottom: 28px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .progress-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-500);
+    }
+
+    .progress-step {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green-700);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-300));
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    /* ===== QUESTION ===== */
+    .question-text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--green-900);
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--gray-50);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .option-btn:hover {
+      border-color: var(--green-600);
+      background: var(--green-50);
+      color: var(--green-900);
+      transform: translateX(4px);
+    }
+
+    .option-btn:active {
+      transform: translateX(2px) scale(0.99);
+    }
+
+    .option-btn.selected {
+      border-color: var(--green-600);
+      background: var(--green-100);
+      color: var(--green-900);
+      font-weight: 500;
+    }
+
+    .option-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      transition: all 0.25s ease;
+    }
+
+    .option-btn:hover .option-icon,
+    .option-btn.selected .option-icon {
+      background: var(--green-700);
+      border-color: var(--green-700);
+      color: var(--white);
+    }
+
+    /* ===== LOADING SCREEN ===== */
+    .loading-content {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .loading-spinner {
+      width: 64px;
+      height: 64px;
+      border: 4px solid var(--gray-200);
+      border-top-color: var(--green-700);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 24px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--green-900);
+      margin-bottom: 8px;
+    }
+
+    .loading-sub {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    .loading-dots::after {
+      content: '';
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes dots {
+      0% { content: ''; }
+      25% { content: '.'; }
+      50% { content: '..'; }
+      75% { content: '...'; }
+    }
+
+    /* ===== RESULT SCREEN ===== */
+    .result-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .result-emoji {
+      font-size: 48px;
+      margin-bottom: 12px;
+      animation: bounceIn 0.6s ease;
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .result-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-500);
+      margin-bottom: 8px;
+    }
+
+    .result-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .result-eixo-name {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--green-700);
+      margin-bottom: 16px;
+    }
+
+    .result-desc {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    /* Proposals list */
+    .proposals-section {
+      background: var(--green-50);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .proposals-title {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--green-900);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .proposal-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--green-100);
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+
+    .proposal-item:last-child { border-bottom: none; }
+
+    .proposal-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--green-700);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Ranking */
+    .ranking-section {
+      margin-bottom: 24px;
+    }
+
+    .ranking-title {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--green-900);
+      margin-bottom: 14px;
+    }
+
+    .ranking-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .ranking-pos {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .ranking-pos.gold {
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-300));
+      color: var(--white);
+    }
+
+    .ranking-pos.silver {
+      background: var(--gray-300);
+      color: var(--white);
+    }
+
+    .ranking-pos.bronze {
+      background: #cd7f32;
+      color: var(--white);
+    }
+
+    .ranking-pos.normal {
+      background: var(--gray-200);
+      color: var(--gray-600);
+    }
+
+    .ranking-bar-wrapper {
+      flex: 1;
+    }
+
+    .ranking-bar-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-700);
+      margin-bottom: 4px;
+    }
+
+    .ranking-bar {
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .ranking-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    .ranking-bar-fill.first { background: linear-gradient(90deg, var(--green-700), var(--green-600)); }
+    .ranking-bar-fill.other { background: var(--gray-400); }
+
+    /* ===== MATCH CARDS (voce pediu → rafaela propoe) ===== */
+    .matches-section {
+      margin-bottom: 24px;
+    }
+
+    .matches-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--green-900);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .match-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      animation: slideIn 0.4s ease;
+    }
+
+    .match-card:last-child { margin-bottom: 0; }
+
+    .match-you {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .match-you-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--gray-500);
+      flex-shrink: 0;
+    }
+
+    .match-you-text {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.4;
+    }
+
+    .match-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 4px 0;
+      color: var(--gold-400);
+      font-size: 16px;
+    }
+
+    .match-rafaela {
+      background: var(--green-50);
+      border: 1px solid var(--green-100);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .match-rafaela-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--green-700);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .match-rafaela-text {
+      font-size: 13px;
+      color: var(--green-900);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* Buttons area */
+    .result-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ===== CONFETTI ===== */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      overflow: hidden;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 480px) {
+      body { padding: 10px; }
+      .card { padding: 28px 20px; border-radius: 16px; }
+      .welcome-title { font-size: 20px; }
+      .welcome-photo { width: 100px; height: 100px; }
+      .question-text { font-size: 18px; }
+      .option-btn { padding: 12px 14px; font-size: 13px; }
+      .result-title { font-size: 19px; }
+      .stat-number { font-size: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <!-- ===== WELCOME ===== -->
+  <div id="screen-welcome" class="screen active">
+    <div class="card">
+      <div style="text-align:center">
+        <span class="welcome-badge">Quiz Interativo</span>
+      </div>
+      <img src="foto-rafaela.jpeg" alt="Rafaela Consalter" class="welcome-photo">
+      <div class="welcome-name">Rafaela Consalter</div>
+      <div class="welcome-role">Candidata a Defensora P&uacute;blica-Geral do RS</div>
+      <h1 class="welcome-title">Descubra quais propostas mais combinam com voc&ecirc;!</h1>
+      <p class="welcome-desc">Responda 6 perguntas r&aacute;pidas e descubra qual dos eixos de propostas da Rafaela est&aacute; mais alinhado com suas prioridades.</p>
+      <div class="welcome-stats">
+        <div class="stat">
+          <div class="stat-number">35</div>
+          <div class="stat-label">Propostas</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Eixos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">1<span style="font-size:16px">min</span></div>
+          <div class="stat-label">Para fazer</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="startQuiz()">Come&ccedil;ar o Quiz</button>
+    </div>
+  </div>
+
+  <!-- ===== QUESTION SCREEN ===== -->
+  <div id="screen-question" class="screen">
+    <div class="card">
+      <div class="progress-wrapper">
+        <div class="progress-header">
+          <span class="progress-label">Seu progresso</span>
+          <span class="progress-step" id="progress-step">1 de 6</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill" style="width:16.6%"></div>
+        </div>
+      </div>
+      <h2 class="question-text" id="question-text"></h2>
+      <div class="options-list" id="options-list"></div>
+    </div>
+  </div>
+
+  <!-- ===== LOADING ===== -->
+  <div id="screen-loading" class="screen">
+    <div class="card">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Analisando suas respostas<span class="loading-dots"></span></div>
+        <div class="loading-sub">Cruzando com as 35 propostas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== RESULT ===== -->
+  <div id="screen-result" class="screen">
+    <div class="card">
+      <div class="result-header">
+        <div class="result-emoji">&#9989;</div>
+        <h2 class="result-title">A Rafaela j&aacute; tem proposta para tudo que voc&ecirc; pediu!</h2>
+      </div>
+      <p class="result-desc">Veja abaixo: para cada resposta sua, a Rafaela tem uma a&ccedil;&atilde;o concreta no plano dela.</p>
+
+      <div class="matches-section">
+        <div id="matches-list"></div>
+      </div>
+
+      <div class="result-buttons">
+        <a id="btn-whatsapp" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Compartilhar no WhatsApp
+        </a>
+        <a id="btn-site" class="btn-secondary" href="https://marcelompiton.github.io/site-campanha/#propostas" target="_blank" rel="noopener" style="text-align:center;text-decoration:none">
+          Ver todas as 35 propostas
+        </a>
+        <button class="btn-secondary" onclick="restartQuiz()" style="margin-top:4px">
+          Refazer o quiz
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confetti container -->
+<div class="confetti-container" id="confetti-container"></div>
+
+<script>
+  // ===== DATA =====
+  const questions = [
+    {
+      text: "O que mais te incomoda hoje na Defensoria?",
+      options: [
+        { label: "Falta de transpar\u00eancia nas decis\u00f5es", icon: "&#128269;", eixo: 0 },
+        { label: "Desvaloriza\u00e7\u00e3o da carreira", icon: "&#128170;", eixo: 1 },
+        { label: "Sobrecarga e desorganiza\u00e7\u00e3o do trabalho", icon: "&#128203;", eixo: 2 },
+        { label: "Atraso tecnol\u00f3gico", icon: "&#128187;", eixo: 3 },
+        { label: "Judicializa\u00e7\u00e3o excessiva dos conflitos", icon: "&#9878;&#65039;", eixo: 4 },
+        { label: "Falta de valoriza\u00e7\u00e3o dos servidores", icon: "&#129309;", eixo: 5 }
+      ]
+    },
+    {
+      text: "Se pudesse mudar UMA coisa amanh\u00e3, seria...",
+      options: [
+        { label: "Dashboard p\u00fablico de indicadores", icon: "&#128202;", eixo: 0 },
+        { label: "Implanta\u00e7\u00e3o do ATS", icon: "&#128176;", eixo: 1 },
+        { label: "Abertura de edital de remo\u00e7\u00e3o", icon: "&#128205;", eixo: 2 },
+        { label: "IA como assistente no atendimento", icon: "&#129302;", eixo: 3 },
+        { label: "C\u00e2maras de Concilia\u00e7\u00e3o ativas", icon: "&#128101;", eixo: 4 },
+        { label: "Canal de escuta para servidores", icon: "&#128227;", eixo: 5 }
+      ]
+    },
+    {
+      text: "Qual frase mais te representa?",
+      options: [
+        { label: "Quero saber para onde vai cada centavo", icon: "&#128270;", eixo: 0 },
+        { label: "Mere\u00e7o reconhecimento pelo meu trabalho", icon: "&#11088;", eixo: 1 },
+        { label: "Preciso de condi\u00e7\u00f5es dignas para trabalhar", icon: "&#127919;", eixo: 2 },
+        { label: "Tecnologia \u00e9 o caminho", icon: "&#128640;", eixo: 3 },
+        { label: "Resolver sem judicializar \u00e9 poss\u00edvel", icon: "&#129309;", eixo: 4 },
+        { label: "Servidor tamb\u00e9m \u00e9 Defensoria", icon: "&#128149;", eixo: 5 }
+      ]
+    },
+    {
+      text: "O que faria a Defensoria ser refer\u00eancia nacional?",
+      options: [
+        { label: "Gest\u00e3o aberta e dados p\u00fablicos", icon: "&#127760;", eixo: 0 },
+        { label: "Carreira atrativa e valorizada", icon: "&#127942;", eixo: 1 },
+        { label: "Organiza\u00e7\u00e3o exemplar de trabalho", icon: "&#128736;&#65039;", eixo: 2 },
+        { label: "Ser l\u00edder em inova\u00e7\u00e3o e IA", icon: "&#129504;", eixo: 3 },
+        { label: "Protagonismo na resolu\u00e7\u00e3o extrajudicial", icon: "&#9878;&#65039;", eixo: 4 },
+        { label: "Ambiente de trabalho humanizado", icon: "&#127793;", eixo: 5 }
+      ]
+    },
+    {
+      text: "Qual conquista te deixaria mais satisfeito(a)?",
+      options: [
+        { label: "Gabinete aberto e relat\u00f3rio de gest\u00e3o", icon: "&#128196;", eixo: 0 },
+        { label: "Pagamento de acervo e aux\u00edlio creche", icon: "&#128178;", eixo: 1 },
+        { label: "Regulariza\u00e7\u00e3o das acumula\u00e7\u00f5es cautelares", icon: "&#128221;", eixo: 2 },
+        { label: "Portal de consulta para assistidos", icon: "&#128241;", eixo: 3 },
+        { label: "Parcerias para resolu\u00e7\u00e3o extrajudicial", icon: "&#129309;", eixo: 4 },
+        { label: "Fluxos claros e ambiente saud\u00e1vel", icon: "&#127807;", eixo: 5 }
+      ]
+    },
+    {
+      text: "Complete: \u2018A nova gest\u00e3o precisa urgentemente de...\u2019",
+      options: [
+        { label: "Transpar\u00eancia e planejamento", icon: "&#128161;", eixo: 0 },
+        { label: "Respeito \u00e0s prerrogativas", icon: "&#128081;", eixo: 1 },
+        { label: "Reorganiza\u00e7\u00e3o dos fluxos", icon: "&#9881;&#65039;", eixo: 2 },
+        { label: "Capacita\u00e7\u00e3o em tecnologia", icon: "&#127891;", eixo: 3 },
+        { label: "Foco na concilia\u00e7\u00e3o", icon: "&#128588;", eixo: 4 },
+        { label: "Valoriza\u00e7\u00e3o de quem faz acontecer", icon: "&#128150;", eixo: 5 }
+      ]
+    }
+  ];
+
+  const eixos = [
+    {
+      name: "Transpar\u00eancia, Planejamento e Governan\u00e7a",
+      emoji: "&#128269;",
+      headline: "Voc\u00ea quer transpar\u00eancia. A Rafaela j\u00e1 tem um plano para isso.",
+      desc: "A sua principal demanda \u00e9 por uma gest\u00e3o aberta e transparente. A Rafaela tem propostas concretas para garantir que cada decis\u00e3o e cada centavo da Defensoria sejam vis\u00edveis para todos:",
+      proposalsTitle: "A Rafaela j\u00e1 tem essas propostas para voc\u00ea:",
+      proposals: [
+        "Transpar\u00eancia ativa em gest\u00e3o de recursos",
+        "Democratiza\u00e7\u00e3o do debate or\u00e7ament\u00e1rio",
+        "Reativa\u00e7\u00e3o de sistemas Jasper e Consulta Institucional",
+        "Gabinete aberto e interioriza\u00e7\u00e3o",
+        "Plano de conting\u00eancia clim\u00e1tica",
+        "Dashboard p\u00fablico de indicadores",
+        "Relat\u00f3rio semestral de gest\u00e3o",
+        "Auditoria participativa de gastos"
+      ]
+    },
+    {
+      name: "Valoriza\u00e7\u00e3o da Carreira",
+      emoji: "&#128170;",
+      headline: "Voc\u00ea quer valoriza\u00e7\u00e3o. A Rafaela j\u00e1 tem um plano para isso.",
+      desc: "A sua principal demanda \u00e9 o reconhecimento de quem dedica a vida \u00e0 Defensoria. A Rafaela tem propostas firmes para valorizar a carreira de verdade:",
+      proposalsTitle: "A Rafaela j\u00e1 tem essas propostas para voc\u00ea:",
+      proposals: [
+        "Defesa das prerrogativas funcionais",
+        "Implanta\u00e7\u00e3o de Adicional por Tempo de Servi\u00e7o (ATS)",
+        "Pagamento de acervo durante f\u00e9rias e licen\u00e7as",
+        "N\u00e3o prescri\u00e7\u00e3o das folgas",
+        "Reajuste do aux\u00edlio alimenta\u00e7\u00e3o",
+        "Pagamento de aux\u00edlio creche",
+        "Acolhimento qualificado em sa\u00fade mental",
+        "Plano de carreira estruturado"
+      ]
+    },
+    {
+      name: "Organiza\u00e7\u00e3o do Trabalho",
+      emoji: "&#128203;",
+      headline: "Voc\u00ea quer organiza\u00e7\u00e3o. A Rafaela j\u00e1 tem um plano para isso.",
+      desc: "A sua principal demanda \u00e9 por condi\u00e7\u00f5es dignas e organiza\u00e7\u00e3o real do trabalho. A Rafaela tem um plano concreto para reorganizar fluxos, remo\u00e7\u00f5es e distribui\u00e7\u00e3o:",
+      proposalsTitle: "A Rafaela j\u00e1 tem essas propostas para voc\u00ea:",
+      proposals: [
+        "Regulariza\u00e7\u00e3o de defensorias em acumula\u00e7\u00e3o cautelar",
+        "Restabelecimento do Plant\u00e3o de Flagrantes",
+        "Reativa\u00e7\u00e3o da NUVEM (gest\u00e3o de trabalho)",
+        "Reorganiza\u00e7\u00e3o de fluxos administrativos",
+        "Prioridade absoluta para abertura de edital de remo\u00e7\u00e3o",
+        "Autonomia das regionais",
+        "Igualdade no acesso a vagas internas",
+        "Central de dados para gest\u00e3o de acervo"
+      ]
+    },
+    {
+      name: "Inova\u00e7\u00e3o Tecnol\u00f3gica e IA",
+      emoji: "&#129302;",
+      headline: "Voc\u00ea quer inova\u00e7\u00e3o. A Rafaela j\u00e1 tem um plano para isso.",
+      desc: "A sua principal demanda \u00e9 modernizar a Defensoria com tecnologia. A Rafaela quer colocar a institui\u00e7\u00e3o na vanguarda com intelig\u00eancia artificial e ferramentas modernas:",
+      proposalsTitle: "A Rafaela j\u00e1 tem essas propostas para voc\u00ea:",
+      proposals: [
+        "IA como assistente de atendimento em tempo real",
+        "Integra\u00e7\u00e3o nativa de IA no portal",
+        "Programa de capacita\u00e7\u00e3o cont\u00ednua em IA",
+        "Portal de consulta processual para assistidos",
+        "Triagem inteligente de intima\u00e7\u00f5es"
+      ]
+    },
+    {
+      name: "Atua\u00e7\u00e3o Extrajudicial",
+      emoji: "&#9878;&#65039;",
+      headline: "Voc\u00ea quer concilia\u00e7\u00e3o. A Rafaela j\u00e1 tem um plano para isso.",
+      desc: "A sua principal demanda \u00e9 resolver mais conflitos sem judicializar. A Rafaela prop\u00f5e reativar c\u00e2maras de concilia\u00e7\u00e3o e fortalecer a via extrajudicial:",
+      proposalsTitle: "A Rafaela j\u00e1 tem essas propostas para voc\u00ea:",
+      proposals: [
+        "Restabelecimento de C\u00e2maras de Concilia\u00e7\u00e3o",
+        "Parcerias institucionais para resolu\u00e7\u00e3o extrajudicial",
+        "Capacita\u00e7\u00e3o em t\u00e9cnicas de negocia\u00e7\u00e3o"
+      ]
+    },
+    {
+      name: "Valoriza\u00e7\u00e3o de Servidores",
+      emoji: "&#129309;",
+      headline: "Voc\u00ea quer respeito aos servidores. A Rafaela j\u00e1 tem um plano para isso.",
+      desc: "A sua principal demanda \u00e9 que servidor tamb\u00e9m seja reconhecido como Defensoria. A Rafaela quer garantir respeito, escuta e participa\u00e7\u00e3o ativa:",
+      proposalsTitle: "A Rafaela j\u00e1 tem essas propostas para voc\u00ea:",
+      proposals: [
+        "Valoriza\u00e7\u00e3o efetiva e respeito institucional",
+        "Fluxos claros e ambiente saud\u00e1vel",
+        "Canal de escuta e participa\u00e7\u00e3o"
+      ]
+    }
+  ];
+
+  // ===== MAPEAMENTO: cada resposta → propostas da Rafaela (array) =====
+  const respostaProposta = [
+    // Pergunta 1: "O que mais te incomoda hoje?"
+    [
+      ["Transpar\u00eancia ativa na gest\u00e3o de recursos", "Dashboard p\u00fablico de indicadores", "Relat\u00f3rio semestral de gest\u00e3o"],
+      ["Implanta\u00e7\u00e3o do ATS", "Defesa das prerrogativas funcionais", "Reajuste do aux\u00edlio alimenta\u00e7\u00e3o"],
+      ["Regulariza\u00e7\u00e3o das acumula\u00e7\u00f5es cautelares", "Reativa\u00e7\u00e3o da NUVEM", "Prioridade absoluta para edital de remo\u00e7\u00e3o"],
+      ["IA como assistente de atendimento em tempo real", "Integra\u00e7\u00e3o nativa de IA no portal"],
+      ["Restabelecimento das C\u00e2maras de Concilia\u00e7\u00e3o", "Parcerias para resolu\u00e7\u00e3o extrajudicial"],
+      ["Valoriza\u00e7\u00e3o efetiva e respeito institucional", "Canal de escuta e participa\u00e7\u00e3o"]
+    ],
+    // Pergunta 2: "Se pudesse mudar UMA coisa amanhã"
+    [
+      ["Dashboard p\u00fablico com indicadores de desempenho e gest\u00e3o"],
+      ["Implanta\u00e7\u00e3o imediata do Adicional por Tempo de Servi\u00e7o (ATS)"],
+      ["Prioridade absoluta para abertura de edital de remo\u00e7\u00e3o"],
+      ["IA como assistente no atendimento", "Triagem inteligente de intima\u00e7\u00f5es"],
+      ["Reativa\u00e7\u00e3o das C\u00e2maras de Concilia\u00e7\u00e3o"],
+      ["Canal direto de escuta e participa\u00e7\u00e3o para servidores"]
+    ],
+    // Pergunta 3: "Qual frase mais te representa?"
+    [
+      ["Democratiza\u00e7\u00e3o do debate or\u00e7ament\u00e1rio", "Relat\u00f3rio semestral de gest\u00e3o", "Auditoria participativa de gastos"],
+      ["Pagamento de acervo durante f\u00e9rias e licen\u00e7as", "Aux\u00edlio creche", "N\u00e3o prescri\u00e7\u00e3o das folgas"],
+      ["Reorganiza\u00e7\u00e3o de fluxos administrativos", "Autonomia das regionais"],
+      ["Programa de capacita\u00e7\u00e3o cont\u00ednua em IA", "Portal de consulta para assistidos"],
+      ["Capacita\u00e7\u00e3o em t\u00e9cnicas de negocia\u00e7\u00e3o", "Parcerias para media\u00e7\u00e3o extrajudicial"],
+      ["Fluxos claros e ambiente saud\u00e1vel", "Respeito institucional aos servidores"]
+    ],
+    // Pergunta 4: "O que faria a Defensoria ser referência nacional?"
+    [
+      ["Gabinete aberto e interioriza\u00e7\u00e3o", "Auditoria participativa de gastos"],
+      ["Plano de carreira estruturado", "Acolhimento qualificado em sa\u00fade mental"],
+      ["Central de dados para gest\u00e3o de acervo", "Igualdade no acesso a vagas internas"],
+      ["Integra\u00e7\u00e3o nativa de IA no portal", "Triagem inteligente de intima\u00e7\u00f5es"],
+      ["Parcerias institucionais para resolu\u00e7\u00e3o extrajudicial", "Capacita\u00e7\u00e3o em negocia\u00e7\u00e3o"],
+      ["Valoriza\u00e7\u00e3o efetiva", "Ambiente de trabalho humanizado"]
+    ],
+    // Pergunta 5: "Qual conquista te deixaria mais satisfeito(a)?"
+    [
+      ["Gabinete aberto", "Relat\u00f3rio semestral de gest\u00e3o transparente"],
+      ["Pagamento de acervo durante f\u00e9rias e licen\u00e7as", "Aux\u00edlio creche"],
+      ["Regulariza\u00e7\u00e3o das defensorias em acumula\u00e7\u00e3o cautelar"],
+      ["Portal de consulta processual acess\u00edvel para os assistidos"],
+      ["Parcerias institucionais para fortalecer a via extrajudicial"],
+      ["Fluxos claros e ambiente saud\u00e1vel para todos"]
+    ],
+    // Pergunta 6: "A nova gestão precisa urgentemente de..."
+    [
+      ["Plano de conting\u00eancia clim\u00e1tica", "Reativa\u00e7\u00e3o dos sistemas Jasper e Consulta Institucional"],
+      ["Defesa das prerrogativas funcionais", "Respeito \u00e0 carreira"],
+      ["Reativa\u00e7\u00e3o da NUVEM", "Reorganiza\u00e7\u00e3o dos fluxos de trabalho"],
+      ["Programa de capacita\u00e7\u00e3o cont\u00ednua em IA para defensores e servidores"],
+      ["Restabelecimento das C\u00e2maras de Concilia\u00e7\u00e3o em todo o estado"],
+      ["Valoriza\u00e7\u00e3o real de quem faz a Defensoria funcionar no dia a dia"]
+    ]
+  ];
+
+  // ===== STATE =====
+  let currentQuestion = 0;
+  let scores = [0, 0, 0, 0, 0, 0];
+  let firstChoices = [];
+  let userAnswers = []; // guarda {questionIdx, optionIdx, label, eixo} de cada resposta
+
+  // ===== SCREEN TRANSITIONS =====
+  function showScreen(id) {
+    const screens = document.querySelectorAll('.screen');
+    const current = document.querySelector('.screen.active');
+
+    if (current) {
+      current.classList.add('exiting');
+      setTimeout(() => {
+        current.classList.remove('active', 'exiting');
+        const next = document.getElementById(id);
+        next.classList.add('active');
+      }, 300);
+    } else {
+      document.getElementById(id).classList.add('active');
+    }
+  }
+
+  // ===== QUIZ LOGIC =====
+  function startQuiz() {
+    currentQuestion = 0;
+    scores = [0, 0, 0, 0, 0, 0];
+    firstChoices = [];
+    userAnswers = [];
+    renderQuestion();
+    showScreen('screen-question');
+  }
+
+  function renderQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById('question-text').innerHTML = q.text;
+    document.getElementById('progress-step').textContent = (currentQuestion + 1) + ' de 6';
+    document.getElementById('progress-fill').style.width = ((currentQuestion + 1) / 6 * 100) + '%';
+
+    const list = document.getElementById('options-list');
+    list.innerHTML = '';
+
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = '<span class="option-icon">' + opt.icon + '</span><span>' + opt.label + '</span>';
+      btn.addEventListener('click', () => selectOption(opt.eixo, i, btn));
+      list.appendChild(btn);
+    });
+  }
+
+  function selectOption(eixo, optionIdx, btnEl) {
+    // Visual feedback
+    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    btnEl.classList.add('selected');
+
+    // Score
+    scores[eixo]++;
+    if (!firstChoices.includes(eixo)) firstChoices.push(eixo);
+
+    // Guardar resposta
+    const q = questions[currentQuestion];
+    userAnswers.push({
+      questionIdx: currentQuestion,
+      optionIdx: optionIdx,
+      label: q.options[optionIdx].label,
+      eixo: eixo
+    });
+
+    // Next question after brief delay
+    setTimeout(() => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showScreen('screen-question');
+        setTimeout(renderQuestion, 350);
+      } else {
+        showLoading();
+      }
+    }, 400);
+  }
+
+  function showLoading() {
+    showScreen('screen-loading');
+    setTimeout(showResult, 2200);
+  }
+
+  // ===== RESULT =====
+  function showResult() {
+    // Montar os 6 match cards: voce pediu → rafaela propoe
+    const matchesList = document.getElementById('matches-list');
+    matchesList.innerHTML = '';
+
+    userAnswers.forEach((answer, i) => {
+      const propostas = respostaProposta[answer.questionIdx][answer.optionIdx];
+      const card = document.createElement('div');
+      card.className = 'match-card';
+      card.style.animationDelay = (i * 0.1) + 's';
+
+      // Montar lista de propostas
+      let propostasHtml = '';
+      propostas.forEach(p => {
+        propostasHtml += '<div style="display:flex;align-items:flex-start;gap:6px;margin-top:4px"><span style="color:var(--green-700);flex-shrink:0">&#10003;</span><span>' + p + '</span></div>';
+      });
+
+      card.innerHTML =
+        '<div class="match-you">' +
+          '<span class="match-you-label">Voc\u00ea pediu:</span>' +
+          '<span class="match-you-text">' + answer.label + '</span>' +
+        '</div>' +
+        '<div class="match-arrow">\u2193</div>' +
+        '<div class="match-rafaela">' +
+          '<div class="match-rafaela-label">&#9989; A Rafaela prop\u00f5e:</div>' +
+          '<div class="match-rafaela-text">' + propostasHtml + '</div>' +
+        '</div>';
+      matchesList.appendChild(card);
+    });
+
+    // WhatsApp share
+    const shareText = 'Fiz o quiz da Rafaela Consalter e ela j\u00e1 tem proposta para tudo que eu pedi! Descubra as suas: ' + window.location.href;
+    document.getElementById('btn-whatsapp').href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(shareText);
+
+    showScreen('screen-result');
+
+    // Confetti
+    setTimeout(launchConfetti, 500);
+  }
+
+  function restartQuiz() {
+    startQuiz();
+  }
+
+  // ===== CONFETTI =====
+  function launchConfetti() {
+    const container = document.getElementById('confetti-container');
+    container.innerHTML = '';
+    const colors = ['#26613f', '#c4a44e', '#d4ba6a', '#2d7a4a', '#e6d49a', '#1a3a2a'];
+
+    for (let i = 0; i < 60; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + '%';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.width = (Math.random() * 8 + 6) + 'px';
+      piece.style.height = (Math.random() * 8 + 6) + 'px';
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      piece.style.animationDelay = (Math.random() * 1.5) + 's';
+      container.appendChild(piece);
+    }
+
+    setTimeout(() => { container.innerHTML = ''; }, 5000);
+  }
+</script>
+
+</body>
+</html>
