@@ -698,6 +698,53 @@
 
 
     /* ============================================
+       COMPROMISSOS
+       ============================================ */
+    .compromissos-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .compromisso-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .compromisso-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .compromisso-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .compromisso-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      cursor: pointer;
+      padding: 20px;
+    }
+    .compromisso-overlay img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    /* ============================================
        PROPOSALS
        ============================================ */
     .proposals-nav {
@@ -1211,6 +1258,11 @@
       .about-highlights {
         grid-template-columns: repeat(4, 1fr);
       }
+
+      .compromissos-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 900px;
+      }
     }
 
     /* ============================================
@@ -1339,6 +1391,7 @@
       <nav class="nav-desktop" role="navigation" aria-label="Menu principal">
         <a href="#inicio">In&iacute;cio</a>
         <a href="#sobre">Quem sou</a>
+        <a href="#compromissos">Compromissos</a>
         <a href="#propostas">Propostas</a>
         <a href="#manifesto">Por que agora</a>
         <a href="#galeria">Galeria</a>
@@ -1355,6 +1408,7 @@
   <nav class="nav-mobile" id="mobile-nav" role="navigation" aria-label="Menu mobile" aria-hidden="true">
     <a href="#inicio">In&iacute;cio</a>
     <a href="#sobre">Quem sou</a>
+    <a href="#compromissos">Compromissos</a>
     <a href="#propostas">Propostas</a>
     <a href="#manifesto">Por que agora</a>
     <a href="#galeria">Galeria</a>
@@ -1450,8 +1504,30 @@
     </div>
   </section>
 
+  <!-- ========== COMPROMISSOS ========== -->
+  <section class="section section-alt" id="compromissos">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-divider"></div>
+        <h2>Compromissos</h2>
+        <p>Posicionamentos diretos da candidata sobre temas importantes para a carreira.</p>
+      </div>
+      <div class="compromissos-grid fade-in">
+        <div class="compromisso-card" onclick="openCompromisso(this)">
+          <img src="compromisso-autonomia.jpeg" alt="Autonomia da Defensora e do Defensor como gestores da equipe">
+        </div>
+        <div class="compromisso-card" onclick="openCompromisso(this)">
+          <img src="compromisso-maternidade.jpeg" alt="Valoriza&ccedil;&atilde;o da maternidade e paternidade">
+        </div>
+        <div class="compromisso-card" onclick="openCompromisso(this)">
+          <img src="compromisso-transparencia.jpeg" alt="A import&acirc;ncia da efetiva transpar&ecirc;ncia com a classe">
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== PROPOSALS ========== -->
-  <section class="section section-alt" id="propostas">
+  <section class="section" id="propostas">
     <div class="container">
       <div class="section-header">
         <div class="section-divider"></div>
@@ -2238,6 +2314,15 @@
       btn.classList.toggle('active');
       const label = btn.querySelector('span:first-child');
       label.textContent = bio.classList.contains('show') ? 'Recolher' : 'Saiba mais sobre a Rafaela';
+    }
+
+    function openCompromisso(card) {
+      const img = card.querySelector('img');
+      const overlay = document.createElement('div');
+      overlay.className = 'compromisso-overlay';
+      overlay.innerHTML = '<img src="' + img.src + '" alt="' + img.alt + '">';
+      overlay.addEventListener('click', function() { overlay.remove(); });
+      document.body.appendChild(overlay);
     }
   </script>
 </body>
